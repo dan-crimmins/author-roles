@@ -24,7 +24,7 @@ class Admin_Settings_Controller {
 		add_action('admin_init', array(&$this, 'register_settings'));
 		
 		//since we are using a custom capability (not manage_options) for this settings page this is necessary.
-		add_filter('option_page_capability_' . $this->settings_field, create_function(null, 'return "activity_report_admin";'));
+		add_filter('option_page_capability_' . $this->settings_field, create_function(null, 'return "author_roles_admin";'));
 	}
 	
 	public function menu() {
@@ -37,7 +37,7 @@ class Admin_Settings_Controller {
 		register_setting($this->settings_field, $this->settings_field, array($this, 'settings_save'));
 	
 		add_settings_section($this->prefix . 'roles_section', __('Author Roles Settings'), array(&$this, 'roles_section'), 'author-roles-settings');
-		add_settings_field('roles_dropdown', __('Roles for Authors (choose multiple)'), array(&$this, 'roles_dropdown'), 'author-roles-settings', $this->prefix . 'roles_section');
+		add_settings_field('roles_dropdown', __('Roles for Authors (choose multiple [Ctrl + Left click] )'), array(&$this, 'roles_dropdown'), 'author-roles-settings', $this->prefix . 'roles_section');
 		
 	}
 	
@@ -50,7 +50,7 @@ class Admin_Settings_Controller {
 	
 	public function roles_section() {
 		
-		echo '<p>' . __('Select Author Roles') . '</p>';
+		echo '<p>' . __('Select Author Roles.') . '</p>';
 	}
 	
 	public function roles_dropdown($output) {

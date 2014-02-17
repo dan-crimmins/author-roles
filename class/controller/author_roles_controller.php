@@ -18,6 +18,8 @@ class Author_Roles_Controller {
 		$this->_setOptions();
 		
 		add_filter('wp_dropdown_users', array(&$this, 'author_dropdown'));
+		add_action('user_register', array(&$this, 'clear_users_cache'));
+		add_action('edit_user_profile_update', array(&$this, 'clear_users_cache'));
 		
 	}
 		
@@ -33,6 +35,11 @@ class Author_Roles_Controller {
 													true);
 		
 		return $output;
+	}
+	
+	public function clear_users_cache($user_id) {
+		
+		Users_Model::clearCache();
 	}
 	
 	protected function _setOptions() {
