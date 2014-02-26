@@ -18,7 +18,7 @@ class Author_Roles_Controller {
 		$this->_setOptions();
 		
 		add_filter('wp_dropdown_users', array(&$this, 'author_dropdown'));
-		add_action('user_register', array(&$this, 'clear_users_cache'));
+		//add_action('user_register', array(&$this, 'clear_users_cache'));
 		add_action('edit_user_profile_update', array(&$this, 'clear_users_cache'));
 		
 	}
@@ -29,10 +29,10 @@ class Author_Roles_Controller {
 		global $post;
 		
 		$output = Plugin_Utils::view('form/input_select', array('name'		=>	'post_author_override',
-															'id'		=>	'post_author_override',
-															'options' 	=>	$this->_options,
-															'selected'	=>	$post->post_author),
-													true);
+																'id'		=>	'post_author_override',
+																'options' 	=>	$this->_options,
+																'selected'	=>	$post->post_author),
+															true);
 		
 		return $output;
 	}
